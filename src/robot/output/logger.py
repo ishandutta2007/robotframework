@@ -56,8 +56,8 @@ class Logger(AbstractLogger):
         self._console_logger = None
         self._syslog = None
         self._xml_logger = None
-        self._listeners = None
-        self._library_listeners = None
+        self._cli_listeners = None
+        self._lib_listeners = None
         self._other_loggers = []
         self._message_cache = []
         self._log_message_cache = None
@@ -71,16 +71,24 @@ class Logger(AbstractLogger):
             self.register_console_logger()
 
     @property
+    def _listeners(self):
+        cli_listeners = list(self._cli_listeners or [])
+        lib_listeners = list(self._lib_listeners or [])
+        return sorted(cli_listeners + lib_listeners, key=lambda li: -li.order)
+
+    @property
     def start_loggers(self):
-        loggers = [self._console_logger, self._syslog, self._xml_logger,
-                   self._listeners, self._library_listeners]
-        return [logger for logger in self._other_loggers + loggers if logger]
+        loggers = (self._other_loggers
+                   + [self._console_logger, self._syslog, self._xml_logger]
+                   + self._listeners)
+        return [logger for logger in loggers if logger]
 
     @property
     def end_loggers(self):
-        loggers = [self._listeners, self._library_listeners,
-                   self._console_logger, self._syslog, self._xml_logger]
-        return [logger for logger in loggers + self._other_loggers if logger]
+        loggers = (self._listeners
+                   + [self._console_logger, self._syslog, self._xml_logger]
+                   + self._other_loggers)
+        return [logger for logger in loggers if logger]
 
     def __iter__(self):
         return iter(self.end_loggers)
@@ -132,10 +140,10 @@ class Logger(AbstractLogger):
         self._xml_logger = None
 
     def register_listeners(self, listeners, library_listeners):
-        self._listeners = listeners
-        self._library_listeners = library_listeners
-        if listeners:
-            self._relay_cached_messages(listeners)
+        self._cli_listeners = listeners
+        self._lib_listeners = library_listeners
+        for listener in listeners or ():
+            self._relay_cached_messages(listener)
 
     def register_logger(self, *loggers):
         for logger in loggers:
@@ -398,9 +406,17 @@ class Logger(AbstractLogger):
         for logger in self.end_loggers:
             logger.end_error(data, result)
 
-    def imported(self, import_type, name, **attrs):
+    def library_import(self, library, importer):
         for logger in self:
-            logger.imported(import_type, name, attrs)
+            logger.library_import(library, importer)
+
+    def resource_import(self, resource, importer):
+        for logger in self:
+            logger.resource_import(resource, importer)
+
+    def variables_import(self, variables, importer):
+        for logger in self:
+            logger.variables_import(variables, importer)
 
     def output_file(self, path):
         for logger in self:

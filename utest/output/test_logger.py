@@ -20,6 +20,7 @@ class LoggerMock:
     def __init__(self, *expected):
         self.expected = list(expected)
         self.logger = self
+        self.order = 0
 
     def message(self, msg):
         exp_msg, exp_level = self.expected.pop(0)
@@ -32,6 +33,9 @@ class LoggerMock:
 
     def close(self):
         pass
+
+    def __iter__(self):
+        yield self
 
 
 class LoggerMock2(LoggerMock, LoggerApi):

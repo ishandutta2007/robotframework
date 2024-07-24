@@ -12,9 +12,9 @@ from robot.utils.asserts import assert_equal, assert_false, assert_true, assert_
 
 
 CURDIR = Path(__file__).resolve().parent
-GOLDEN_XML = (CURDIR / 'golden.xml').read_text()
-GOLDEN_XML_TWICE = (CURDIR / 'goldenTwice.xml').read_text()
-SUITE_TEARDOWN_FAILED = (CURDIR / 'suite_teardown_failed.xml').read_text()
+GOLDEN_XML = (CURDIR / 'golden.xml').read_text(encoding='UTF-8')
+GOLDEN_XML_TWICE = (CURDIR / 'goldenTwice.xml').read_text(encoding='UTF-8')
+SUITE_TEARDOWN_FAILED = (CURDIR / 'suite_teardown_failed.xml').read_text(encoding='UTF-8')
 
 
 class TestBuildingSuiteExecutionResult(unittest.TestCase):
@@ -28,7 +28,7 @@ class TestBuildingSuiteExecutionResult(unittest.TestCase):
         assert_equal(self.suite.source, Path('normal.html'))
         assert_equal(self.suite.name, 'Normal')
         assert_equal(self.suite.doc, 'Normal test cases')
-        assert_equal(self.suite.metadata, {'Something': 'My Value'})
+        assert_equal(self.suite.metadata, {'Something': 'My Value', 'Nön-ÄSCÏÏ': '🤖'})
         assert_equal(self.suite.status, 'PASS')
         assert_equal(self.suite.starttime, '20111024 13:41:20.873')
         assert_equal(self.suite.endtime, '20111024 13:41:20.952')
@@ -352,7 +352,7 @@ class TestUsingPathlibPath(unittest.TestCase):
         assert_equal(suite.source, Path('normal.html'))
         assert_equal(suite.name, 'Normal')
         assert_equal(suite.doc, 'Normal test cases')
-        assert_equal(suite.metadata, {'Something': 'My Value'})
+        assert_equal(suite.metadata, {'Something': 'My Value', 'Nön-ÄSCÏÏ': '🤖'})
         assert_equal(suite.status, 'PASS')
         assert_equal(suite.starttime, '20111024 13:41:20.873')
         assert_equal(suite.endtime, '20111024 13:41:20.952')
@@ -396,7 +396,7 @@ class TestJsonResult(unittest.TestCase):
                       {'name': 'T3', 'status': 'FAIL'}]
         })
         cls.path = Path(os.getenv('TEMPDIR', tempfile.gettempdir()), 'robot-utest.json')
-        cls.path.write_text(cls.data)
+        cls.path.write_text(cls.data, encoding='UTF-8')
 
     def test_json_string(self):
         self._verify(self.data)
@@ -409,7 +409,7 @@ class TestJsonResult(unittest.TestCase):
         self._verify(str(self.path))
 
     def test_json_file(self):
-        with open(self.path) as file:
+        with open(self.path, encoding='UTF-8') as file:
             self._verify(file)
 
     def _verify(self, source):
