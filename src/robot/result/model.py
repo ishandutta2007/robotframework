@@ -37,7 +37,7 @@ __ http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#
 from datetime import datetime, timedelta
 from io import StringIO
 from pathlib import Path
-from typing import Literal, Mapping, overload, Sequence, TextIO, TypeVar, Union
+from typing import Final, Literal, Mapping, overload, Sequence, TextIO, TypeVar, Union
 
 from robot import model
 from robot.model import (
@@ -94,11 +94,11 @@ class Message(model.Message):
 
 
 class StatusMixin:
-    PASS = "PASS"
-    FAIL = "FAIL"
-    SKIP = "SKIP"
-    NOT_RUN = "NOT RUN"
-    NOT_SET = "NOT SET"
+    PASS: Final = "PASS"
+    FAIL: Final = "FAIL"
+    SKIP: Final = "SKIP"
+    NOT_RUN: Final = "NOT RUN"
+    NOT_SET: Final = "NOT SET"
     status: Literal["PASS", "FAIL", "SKIP", "NOT RUN", "NOT SET"]
     __slots__ = ()
 

@@ -14,7 +14,7 @@
 #  limitations under the License.
 
 from pathlib import Path
-from typing import Any, Iterable, Literal, overload, Sequence, TYPE_CHECKING
+from typing import Any, Final, Iterable, Literal, overload, Sequence, TYPE_CHECKING
 
 from robot import model
 from robot.model import BodyItem, create_fixture, DataDict, ModelObject, Tags
@@ -367,10 +367,10 @@ class Variable(ModelObject):
 class Import(ModelObject):
     """Represents library, resource file or variable file import."""
 
+    LIBRARY: Final = "LIBRARY"
+    RESOURCE: Final = "RESOURCE"
+    VARIABLES: Final = "VARIABLES"
     repr_args = ("type", "name", "args", "alias")
-    LIBRARY = "LIBRARY"
-    RESOURCE = "RESOURCE"
-    VARIABLES = "VARIABLES"
 
     def __init__(
         self,
