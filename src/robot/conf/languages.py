@@ -179,8 +179,10 @@ class Language:
     New translations can be added by extending this class and setting class
     attributes listed below.
 
-    Language :attr:`code` is got based on the class name and :attr:`name`
-    based on the docstring.
+    Language :attr:`code` is got based on the class name and :attr:`name` based
+    on the docstring. Built-in languages must have both of them set properly,
+    and new built-in languages must also have a note telling when they have been
+    added. See existing languages for examples.
     """
 
     settings_header: "str | None" = None
@@ -261,13 +263,14 @@ class Language:
     def name(cls) -> str:
         """Language name like 'Finnish' or 'Brazilian Portuguese'.
 
-        Got from the first line of the class docstring.
+        Got from the first line of the class docstring. If class has no docstring,
+        name is got from the class name.
 
         This special property can be accessed also directly from the class.
         """
         if cls is Language:
             return cls.__dict__["name"]
-        return cls.__doc__.splitlines()[0] if cls.__doc__ else ""
+        return cls.__doc__.splitlines()[0] if cls.__doc__ else cls.__name__
 
     @property
     def headers(self) -> "dict[str | None, str]":

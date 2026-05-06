@@ -43,9 +43,9 @@ class TestLanguage(unittest.TestCase):
         class X(Language):
             pass
 
-        X.__doc__ = None
-        assert_equal(X().name, "")
-        assert_equal(X.name, "")
+        assert_equal(X.__doc__, None)
+        assert_equal(X().name, "X")
+        assert_equal(X.name, "X")
 
     def test_standard_languages_have_code_and_name(self):
         for cls in STANDARD_LANGUAGES:
