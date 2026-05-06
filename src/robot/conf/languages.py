@@ -39,7 +39,7 @@ class Languages:
 
     def __init__(
         self,
-        languages: "Iterable[LanguageLike]|LanguageLike|None" = (),
+        languages: "Iterable[LanguageLike] | LanguageLike | None" = (),
         add_english: bool = True,
     ):
         """
@@ -270,7 +270,7 @@ class Language:
         return cls.__doc__.splitlines()[0] if cls.__doc__ else ""
 
     @property
-    def headers(self) -> "dict[str|None, str]":
+    def headers(self) -> "dict[str | None, str]":
         return {
             self.settings_header: En.settings_header,
             self.variables_header: En.variables_header,
@@ -281,7 +281,7 @@ class Language:
         }
 
     @property
-    def settings(self) -> "dict[str|None, str]":
+    def settings(self) -> "dict[str | None, str]":
         return {
             self.library_setting: En.library_setting,
             self.resource_setting: En.resource_setting,

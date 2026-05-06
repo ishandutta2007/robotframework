@@ -35,13 +35,13 @@ class ArgumentParser(ABC):
     def __init__(
         self,
         type: str = "Keyword",
-        error_reporter: "Callable[[str], None]|None" = None,
+        error_reporter: "Callable[[str], None] | None" = None,
     ):
         self.type = type
         self.error_reporter = error_reporter
 
     @abstractmethod
-    def parse(self, source: Any, name: "str|None" = None) -> ArgumentSpec:
+    def parse(self, source: Any, name: "str | None" = None) -> ArgumentSpec:
         raise NotImplementedError
 
     def _report_error(self, error: str):

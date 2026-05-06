@@ -82,17 +82,17 @@ class RobotParser(Parser):
     def parse_model(
         self,
         model: File,
-        defaults: "TestDefaults|None" = None,
+        defaults: "TestDefaults | None" = None,
     ) -> TestSuite:
         name = TestSuite.name_from_source(model.source, self.extensions)
         suite = TestSuite(name=name, source=model.source)
         SuiteBuilder(suite, FileSettings(defaults)).build(model)
         return suite
 
-    def _get_curdir(self, source: Path) -> "str|None":
+    def _get_curdir(self, source: Path) -> "str | None":
         return str(source.parent).replace("\\", "\\\\") if self.process_curdir else None
 
-    def _get_source(self, source: Path) -> "Path|str":
+    def _get_source(self, source: Path) -> "Path | str":
         return source
 
     def parse_resource_file(self, source: Path) -> ResourceFile:

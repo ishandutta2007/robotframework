@@ -104,7 +104,7 @@ class Tags(Sequence[str]):
     @overload
     def __getitem__(self, index: slice) -> "Tags": ...
 
-    def __getitem__(self, index: "int|slice") -> "str|Tags":
+    def __getitem__(self, index: "int | slice") -> "str | Tags":
         if isinstance(index, slice):
             return Tags(self._tags[index])
         return self._tags[index]

@@ -246,7 +246,7 @@ class KeywordDoc(Sortable):
         type_docs = self.type_docs.get("return", {})
         return self._type_to_dict(return_type, type_docs)
 
-    def _type_to_dict(self, type: "TypeInfo|None", type_docs: dict):
+    def _type_to_dict(self, type: "TypeInfo | None", type_docs: dict):
         if not type:
             return None
         return {

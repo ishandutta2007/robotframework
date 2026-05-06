@@ -72,7 +72,7 @@ class TypeInfoTokenizer:
         self.current += 1
         return char
 
-    def peek(self) -> "str|None":
+    def peek(self) -> "str | None":
         try:
             return self.source[self.current]
         except IndexError:
@@ -201,19 +201,19 @@ class TypeInfoParser:
         peeked = self.peek()
         return peeked and peeked.type == expected
 
-    def advance(self) -> "Token|None":
+    def advance(self) -> "Token | None":
         token = self.peek()
         if token:
             self.current += 1
         return token
 
-    def peek(self) -> "Token|None":
+    def peek(self) -> "Token | None":
         try:
             return self.tokens[self.current]
         except IndexError:
             return None
 
-    def error(self, message: str, token: "Token|None" = None) -> NoReturn:
+    def error(self, message: str, token: "Token | None" = None) -> NoReturn:
         if not token:
             token = self.peek()
         position = f"index {token.position}" if token else "end"

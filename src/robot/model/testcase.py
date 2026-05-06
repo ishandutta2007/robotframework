@@ -52,10 +52,10 @@ class TestCase(ModelObject, Generic[KW]):
         self,
         name: str = "",
         doc: str = "",
-        tags: "Tags|Sequence[str]" = (),
-        timeout: "str|None" = None,
-        lineno: "int|None" = None,
-        parent: "TestSuite[KW, TestCase[KW]]|None" = None,
+        tags: "Tags | Sequence[str]" = (),
+        timeout: "str | None" = None,
+        lineno: "int | None" = None,
+        parent: "TestSuite[KW, TestCase[KW]] | None" = None,
     ):
         self.name = name
         self.doc = doc
@@ -68,12 +68,12 @@ class TestCase(ModelObject, Generic[KW]):
         self._teardown: KW | None = None
 
     @setter
-    def body(self, body: "Sequence[BodyItem|DataDict]") -> Body:
+    def body(self, body: "Sequence[BodyItem | DataDict]") -> Body:
         """Test body as a :class:`~robot.model.body.Body` object."""
         return self.body_class(self, body)
 
     @setter
-    def tags(self, tags: "Tags|Sequence[str]") -> Tags:
+    def tags(self, tags: "Tags | Sequence[str]") -> Tags:
         """Test tags as a :class:`~.model.tags.Tags` object."""
         return Tags(tags)
 
@@ -112,7 +112,7 @@ class TestCase(ModelObject, Generic[KW]):
         return self._setup
 
     @setup.setter
-    def setup(self, setup: "KW|DataDict|None"):
+    def setup(self, setup: "KW | DataDict | None"):
         self._setup = create_fixture(
             self.fixture_class,
             setup,
@@ -150,7 +150,7 @@ class TestCase(ModelObject, Generic[KW]):
         return self._teardown
 
     @teardown.setter
-    def teardown(self, teardown: "KW|DataDict|None"):
+    def teardown(self, teardown: "KW | DataDict | None"):
         self._teardown = create_fixture(
             self.fixture_class,
             teardown,
@@ -194,7 +194,7 @@ class TestCase(ModelObject, Generic[KW]):
         return self.full_name
 
     @property
-    def source(self) -> "Path|None":
+    def source(self) -> "Path | None":
         return self.parent.source if self.parent is not None else None
 
     def visit(self, visitor: "SuiteVisitor"):
@@ -225,8 +225,8 @@ class TestCases(ItemList[TC]):
     def __init__(
         self,
         test_class: Type[TC] = TestCase,
-        parent: "TestSuite|None" = None,
-        tests: "Sequence[TC|DataDict]" = (),
+        parent: "TestSuite | None" = None,
+        tests: "Sequence[TC | DataDict]" = (),
     ):
         super().__init__(test_class, {"parent": parent}, tests)
 

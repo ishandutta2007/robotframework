@@ -260,7 +260,7 @@ class _Converter(_BuiltInBase):
         item: object,
         base: "int | None" = None,
         prefix: "str | None" = None,
-        length: "int|None" = None,
+        length: "int | None" = None,
     ) -> str:
         """Converts the given item to a binary string.
 

@@ -375,7 +375,7 @@ class _BaseSettings:
         return Path(self["OutputDir"])
 
     @property
-    def output(self) -> "Path|None":
+    def output(self) -> "Path | None":
         return self["Output"]
 
     @property
@@ -383,15 +383,15 @@ class _BaseSettings:
         return self["LegacyOutput"]
 
     @property
-    def log(self) -> "Path|None":
+    def log(self) -> "Path | None":
         return self["Log"]
 
     @property
-    def report(self) -> "Path|None":
+    def report(self) -> "Path | None":
         return self["Report"]
 
     @property
-    def xunit(self) -> "Path|None":
+    def xunit(self) -> "Path | None":
         return self["XUnit"]
 
     @property

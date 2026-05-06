@@ -44,14 +44,14 @@ class TypeConverter:
     abc = None
     value_types = (str,)
     doc = None
-    nested: "list[TypeConverter]|dict[str, TypeConverter]|None"
+    nested: "list[TypeConverter] | dict[str, TypeConverter] | None"
     _converters = OrderedDict()
 
     def __init__(
         self,
         type_info: "TypeInfo",
-        custom_converters: "CustomArgumentConverters|None" = None,
-        languages: "Languages|None" = None,
+        custom_converters: "CustomArgumentConverters | None" = None,
+        languages: "Languages | None" = None,
     ):
         self.type_info = type_info
         self.custom_converters = custom_converters
@@ -62,9 +62,9 @@ class TypeConverter:
     def _get_nested(
         self,
         type_info: "TypeInfo",
-        custom_converters: "CustomArgumentConverters|None",
-        languages: "Languages|None",
-    ) -> "list[TypeConverter]|None":
+        custom_converters: "CustomArgumentConverters | None",
+        languages: "Languages | None",
+    ) -> "list[TypeConverter] | None":
         if not type_info.nested:
             return None
         return [
@@ -85,7 +85,7 @@ class TypeConverter:
         return self._languages
 
     @languages.setter
-    def languages(self, languages: "Languages|None"):
+    def languages(self, languages: "Languages | None"):
         self._languages = languages
 
     @classmethod
@@ -97,8 +97,8 @@ class TypeConverter:
     def converter_for(
         cls,
         type_info: "TypeInfo",
-        custom_converters: "CustomArgumentConverters|None" = None,
-        languages: "Languages|None" = None,
+        custom_converters: "CustomArgumentConverters | None" = None,
+        languages: "Languages | None" = None,
     ) -> "TypeConverter":
         if type_info.type is None:
             return UnknownConverter(type_info)
@@ -122,7 +122,7 @@ class TypeConverter:
     def convert(
         self,
         value: object,
-        name: "str|None" = None,
+        name: "str | None" = None,
         kind: str = "Argument",
     ) -> object:
         if self.no_conversion_needed(value):
@@ -616,8 +616,8 @@ class TypedDictConverter(TypeConverter):
     def _get_nested(
         self,
         type_info: "TypedDictInfo",
-        custom_converters: "CustomArgumentConverters|None",
-        languages: "Languages|None",
+        custom_converters: "CustomArgumentConverters | None",
+        languages: "Languages | None",
     ) -> "dict[str, TypeConverter]":
         return {
             name: self.converter_for(info, custom_converters, languages)
@@ -835,8 +835,8 @@ class LiteralConverter(TypeConverter):
     def converter_for(
         cls,
         type_info: "TypeInfo",
-        custom_converters: "CustomArgumentConverters|None" = None,
-        languages: "Languages|None" = None,
+        custom_converters: "CustomArgumentConverters | None" = None,
+        languages: "Languages | None" = None,
     ) -> TypeConverter:
         info = type(type_info)(type_info.name, type(type_info.type))
         return super().converter_for(info, custom_converters, languages)
@@ -901,7 +901,7 @@ class CustomConverter(TypeConverter):
         self,
         type_info: "TypeInfo",
         converter_info: "ConverterInfo",
-        languages: "Languages|None" = None,
+        languages: "Languages | None" = None,
     ):
         self.converter_info = converter_info
         super().__init__(type_info, languages=languages)

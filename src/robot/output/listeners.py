@@ -34,8 +34,8 @@ class Listeners:
 
     def __init__(
         self,
-        listeners: "Sequence[str|object]" = (),
-        log_level: "LogLevel|SettableLevel" = "INFO",
+        listeners: "Sequence[str | object]" = (),
+        log_level: "LogLevel | SettableLevel" = "INFO",
     ):
         if isinstance(log_level, str):
             log_level = LogLevel(log_level)
@@ -72,7 +72,7 @@ class Listeners:
 class LibraryListeners(Listeners):
     _listeners: "list[list[ListenerFacade]]"
 
-    def __init__(self, log_level: "LogLevel|str" = "INFO"):
+    def __init__(self, log_level: "LogLevel | str" = "INFO"):
         super().__init__(log_level=log_level)
 
     @property
@@ -123,8 +123,8 @@ class ListenerFacade(LoggerApi, ABC):
     @classmethod
     def create(
         cls,
-        listener: "str|object",
-        log_level: "LogLevel|SettableLevel" = "INFO",
+        listener: "str | object",
+        log_level: "LogLevel | SettableLevel" = "INFO",
         library: object = None,
     ) -> "ListenerFacade":
         if isinstance(log_level, str):

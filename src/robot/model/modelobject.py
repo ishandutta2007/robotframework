@@ -71,7 +71,7 @@ class ModelObject(metaclass=SetterAwareType):
             )
 
     @classmethod
-    def from_json(cls: Type[T], source: "str|bytes|TextIO|Path") -> T:
+    def from_json(cls: Type[T], source: "str | bytes | TextIO | Path") -> T:
         """Create this object based on JSON data.
 
         The data is given as the ``source`` parameter. It can be:
@@ -119,7 +119,7 @@ class ModelObject(metaclass=SetterAwareType):
     @overload
     def to_json(
         self,
-        file: "TextIO|Path|str",
+        file: "TextIO | Path | str",
         *,
         ensure_ascii: bool = False,
         indent: int = 0,
@@ -128,12 +128,12 @@ class ModelObject(metaclass=SetterAwareType):
 
     def to_json(
         self,
-        file: "None|TextIO|Path|str" = None,
+        file: "None | TextIO | Path | str" = None,
         *,
         ensure_ascii: bool = False,
         indent: int = 0,
         separators: "tuple[str, str]" = (",", ":"),
-    ) -> "str|None":
+    ) -> "str | None":
         """Serialize this object into JSON.
 
         The object is first converted to a Python dictionary using the

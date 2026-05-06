@@ -244,9 +244,9 @@ class KeywordLexer(TestOrKeywordLexer):
 
 
 class NestedBlockLexer(BlockLexer, ABC):
-    ctx: "TestCaseContext|KeywordContext"
+    ctx: "TestCaseContext | KeywordContext"
 
-    def __init__(self, ctx: "TestCaseContext|KeywordContext"):
+    def __init__(self, ctx: "TestCaseContext | KeywordContext"):
         super().__init__(ctx)
         self._block_level = 0
 

@@ -61,7 +61,7 @@ class StatementLexer(Lexer, ABC):
     def lex(self):
         raise NotImplementedError
 
-    def _lex_options(self, *names: str, end_index: "int|None" = None):
+    def _lex_options(self, *names: str, end_index: "int | None" = None):
         seen = set()
         for token in reversed(self.statement[:end_index]):
             if "=" in token.value:
@@ -201,7 +201,7 @@ class VariableLexer(TypeAndArguments):
 
 
 class KeywordCallLexer(StatementLexer):
-    ctx: "TestCaseContext|KeywordContext"
+    ctx: "TestCaseContext | KeywordContext"
 
     def lex(self):
         if self.ctx.template_set:

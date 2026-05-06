@@ -57,7 +57,7 @@ class NormalizedDict(MutableMapping[str, V]):
 
     def __init__(
         self,
-        initial: "Mapping[str, V]|Iterable[tuple[str, V]]|None" = None,
+        initial: "Mapping[str, V] | Iterable[tuple[str, V]] | None" = None,
         ignore: "Sequence[str]" = (),
         caseless: bool = True,
         spaceless: bool = True,

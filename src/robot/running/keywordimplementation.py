@@ -44,13 +44,13 @@ class KeywordImplementation(ModelObject):
     def __init__(
         self,
         name: str = "",
-        args: "ArgumentSpec|None" = None,
+        args: "ArgumentSpec | None" = None,
         doc: str = "",
-        tags: "Tags|Sequence[str]" = (),
-        lineno: "int|None" = None,
-        owner: "ResourceFile|TestLibrary|None" = None,
-        parent: "BodyItemParent|None" = None,
-        error: "str|None" = None,
+        tags: "Tags | Sequence[str]" = (),
+        lineno: "int | None" = None,
+        owner: "ResourceFile | TestLibrary | None" = None,
+        parent: "BodyItemParent | None" = None,
+        error: "str | None" = None,
     ):
         self._name = name
         self.embedded = self._get_embedded(name)
@@ -62,7 +62,7 @@ class KeywordImplementation(ModelObject):
         self.parent = parent
         self.error = error
 
-    def _get_embedded(self, name) -> "EmbeddedArguments|None":
+    def _get_embedded(self, name) -> "EmbeddedArguments | None":
         return EmbeddedArguments.from_name(name)
 
     @property
@@ -83,7 +83,7 @@ class KeywordImplementation(ModelObject):
         return self.name
 
     @setter
-    def args(self, spec: "ArgumentSpec|None") -> ArgumentSpec:
+    def args(self, spec: "ArgumentSpec | None") -> ArgumentSpec:
         """Information about accepted arguments.
 
         It would be more correct to use term *parameter* instead of
@@ -117,15 +117,15 @@ class KeywordImplementation(ModelObject):
         return getshortdoc(self.doc)
 
     @setter
-    def tags(self, tags: "Tags|Sequence[str]") -> Tags:
+    def tags(self, tags: "Tags | Sequence[str]") -> Tags:
         return Tags(tags)
 
     @property
-    def lineno(self) -> "int|None":
+    def lineno(self) -> "int | None":
         return self._lineno
 
     @lineno.setter
-    def lineno(self, lineno: "int|None"):
+    def lineno(self, lineno: "int | None"):
         self._lineno = lineno
 
     @property
@@ -133,7 +133,7 @@ class KeywordImplementation(ModelObject):
         return bool(self.tags and self.tags.robot("private"))
 
     @property
-    def source(self) -> "Path|None":
+    def source(self) -> "Path | None":
         return self.owner.source if self.owner is not None else None
 
     def matches(self, name: str) -> bool:
@@ -149,8 +149,8 @@ class KeywordImplementation(ModelObject):
 
     def resolve_arguments(
         self,
-        args: "Sequence[str|Any]",
-        named_args: "Mapping[str, Any]|None" = None,
+        args: "Sequence[str | Any]",
+        named_args: "Mapping[str, Any] | None" = None,
         variables=None,
         languages: "LanguagesLike" = None,
     ) -> "tuple[list, list]":
@@ -158,9 +158,9 @@ class KeywordImplementation(ModelObject):
 
     def create_runner(
         self,
-        name: "str|None",
+        name: "str | None",
         languages: "LanguagesLike" = None,
-    ) -> "LibraryKeywordRunner|UserKeywordRunner":
+    ) -> "LibraryKeywordRunner | UserKeywordRunner":
         raise NotImplementedError
 
     def bind(self, data: Keyword) -> "KeywordImplementation":
