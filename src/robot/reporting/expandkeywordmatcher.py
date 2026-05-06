@@ -22,7 +22,7 @@ from robot.utils import MultiMatcher
 class ExpandKeywordMatcher:
 
     def __init__(self, expand_keywords: "str|Sequence[str]"):
-        self.matched_ids: "list[str]" = []
+        self.matched_ids: list[str] = []
         if not expand_keywords:
             expand_keywords = []
         elif isinstance(expand_keywords, str):

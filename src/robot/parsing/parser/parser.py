@@ -122,7 +122,7 @@ def _tokens_to_statements(
 
 def _statements_to_model(statements: Iterator[Statement], source: Source) -> File:
     root = FileParser(source=source)
-    stack: "list[Parser]" = [root]
+    stack: list[Parser] = [root]
     for statement in statements:
         while not stack[-1].handles(statement):
             stack.pop()

@@ -31,7 +31,7 @@ class FileParser(Parser):
 
     def __init__(self, source: "Source|None" = None):
         super().__init__(File(source=self._get_path(source)))
-        self.parsers: "dict[str, type[SectionParser]]" = {
+        self.parsers: dict[str, type[SectionParser]] = {
             Token.SETTING_HEADER: SettingSectionParser,
             Token.VARIABLE_HEADER: VariableSectionParser,
             Token.TESTCASE_HEADER: TestCaseSectionParser,
@@ -62,7 +62,7 @@ class FileParser(Parser):
 
     def parse(self, statement: Statement) -> "SectionParser":
         parser_class = self.parsers[statement.type]
-        model_class: "type[Section]" = parser_class.__annotations__["model"]
+        model_class: type[Section] = parser_class.__annotations__["model"]
         parser = parser_class(model_class(statement))
         self.model.sections.append(parser.model)
         return parser

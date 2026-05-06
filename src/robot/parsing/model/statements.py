@@ -231,7 +231,7 @@ class DocumentationOrMetadata(Statement, ABC):
                 base_offset = first.col_offset
 
     def _get_line_tokens(self) -> "Iterator[list[Token]]":
-        line: "list[Token]" = []
+        line: list[Token] = []
         lineno = -1
         # There are no EOLs during execution or if data has been parsed with
         # `data_only=True` otherwise, so we need to look at line numbers to
@@ -999,7 +999,7 @@ class Arguments(MultiValue):
         return cls(tokens)
 
     def validate(self, ctx: "ValidationContext"):
-        errors: "list[str]" = []
+        errors: list[str] = []
         UserKeywordArgumentParser(error_reporter=errors.append).parse(self.values)
         self.errors = tuple(errors)
 

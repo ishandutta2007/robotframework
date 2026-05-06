@@ -70,8 +70,8 @@ class NormalizedDict(MutableMapping[str, V]):
         Normalizing spec has exact same semantics as with the :func:`normalize`
         function.
         """
-        self._data: "dict[str, V]" = {}
-        self._keys: "dict[str, str]" = {}
+        self._data: dict[str, V] = {}
+        self._keys: dict[str, str] = {}
         self._normalize = lambda s: normalize(s, ignore, caseless, spaceless)
         if initial:
             self.update(initial)

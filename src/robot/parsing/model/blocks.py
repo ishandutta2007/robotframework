@@ -538,7 +538,7 @@ class ValidationContext:
 class FirstStatementFinder(ModelVisitor):
 
     def __init__(self):
-        self.statement: "Statement|None" = None
+        self.statement: Statement | None = None
 
     @classmethod
     def find_from(cls, model: Node) -> "Statement|None":
@@ -558,7 +558,7 @@ class FirstStatementFinder(ModelVisitor):
 class LastStatementFinder(ModelVisitor):
 
     def __init__(self):
-        self.statement: "Statement|None" = None
+        self.statement: Statement | None = None
 
     @classmethod
     def find_from(cls, model: Node) -> "Statement|None":

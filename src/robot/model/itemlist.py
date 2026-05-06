@@ -57,7 +57,7 @@ class ItemList(MutableSequence[T]):
     ):
         self._item_class = item_class
         self._common_attrs = common_attrs
-        self._items: "list[T]" = []
+        self._items: list[T] = []
         if items:
             self.extend(items)
 

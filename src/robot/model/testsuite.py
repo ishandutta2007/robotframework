@@ -73,9 +73,9 @@ class TestSuite(ModelObject, Generic[KW, TC]):
         self.rpa = rpa
         self.suites = []
         self.tests = []
-        self._setup: "KW|None" = None
-        self._teardown: "KW|None" = None
-        self._my_visitors: "list[SuiteVisitor]" = []
+        self._setup: KW | None = None
+        self._teardown: KW | None = None
+        self._my_visitors: list[SuiteVisitor] = []
 
     @staticmethod
     def name_from_source(source: "Path|str|None", extension: Sequence[str] = ()) -> str:
@@ -465,7 +465,7 @@ class TestSuite(ModelObject, Generic[KW, TC]):
         visitor.visit_suite(self)
 
     def to_dict(self) -> "dict[str, Any]":
-        data: "dict[str, Any]" = {"name": self.name}
+        data: dict[str, Any] = {"name": self.name}
         if self.doc:
             data["doc"] = self.doc
         if self.metadata:

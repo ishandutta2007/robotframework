@@ -56,7 +56,7 @@ class Settings(ABC):
     )  # fmt: skip
 
     def __init__(self, languages: Languages):
-        self.settings: "dict[str, list[Token]|None]" = dict.fromkeys(self.names)
+        self.settings: dict[str, list[Token] | None] = dict.fromkeys(self.names)
         self.languages = languages
 
     def lex(self, statement: StatementTokens):

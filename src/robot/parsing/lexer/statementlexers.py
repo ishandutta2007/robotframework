@@ -311,7 +311,7 @@ class ExceptHeaderLexer(StatementLexer):
 
     def lex(self):
         self.statement[0].type = Token.EXCEPT
-        as_index: "int|None" = None
+        as_index: int | None = None
         for index, token in enumerate(self.statement[1:], start=1):
             if token.value == "AS":
                 token.type = Token.AS

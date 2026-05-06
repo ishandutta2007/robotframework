@@ -64,8 +64,8 @@ class TestCase(ModelObject, Generic[KW]):
         self.lineno = lineno
         self.parent = parent
         self.body = []
-        self._setup: "KW|None" = None
-        self._teardown: "KW|None" = None
+        self._setup: KW | None = None
+        self._teardown: KW | None = None
 
     @setter
     def body(self, body: "Sequence[BodyItem|DataDict]") -> Body:
@@ -202,7 +202,7 @@ class TestCase(ModelObject, Generic[KW]):
         visitor.visit_test(self)
 
     def to_dict(self) -> "dict[str, Any]":
-        data: "dict[str, Any]" = {"name": self.name}
+        data: dict[str, Any] = {"name": self.name}
         if self.doc:
             data["doc"] = self.doc
         if self.tags:

@@ -236,8 +236,8 @@ class SuiteStructureParser(SuiteStructureVisitor):
         self.parsers = parsers
         self.rpa = rpa
         self.defaults = defaults
-        self.suite: "TestSuite|None" = None
-        self._stack: "list[tuple[TestSuite, TestDefaults]]" = []
+        self.suite: TestSuite | None = None
+        self._stack: list[tuple[TestSuite, TestDefaults]] = []
 
     @property
     def parent_defaults(self) -> "TestDefaults|None":

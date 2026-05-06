@@ -43,7 +43,7 @@ class BlockParser(Parser, ABC):
 
     def __init__(self, model: Block):
         super().__init__(model)
-        self.parsers: "dict[str, type[NestedBlockParser]]" = {
+        self.parsers: dict[str, type[NestedBlockParser]] = {
             Token.FOR: ForParser,
             Token.WHILE: WhileParser,
             Token.IF: IfParser,

@@ -51,12 +51,12 @@ class Languages:
 
         :meth:`add_language` can be used to add languages after initialization.
         """
-        self.languages: "list[Language]" = []
-        self.headers: "dict[str, str]" = {}
-        self.settings: "dict[str, str]" = {}
-        self.bdd_prefixes: "set[str]" = set()
-        self.true_strings: "set[str]" = {"True", "1"}
-        self.false_strings: "set[str]" = {"False", "0", "None", ""}
+        self.languages: list[Language] = []
+        self.headers: dict[str, str] = {}
+        self.settings: dict[str, str] = {}
+        self.bdd_prefixes: set[str] = set()
+        self.true_strings: set[str] = {"True", "1"}
+        self.false_strings: set[str] = {"False", "0", "None", ""}
         for lang in self._get_languages(languages, add_english):
             self._add_language(lang)
         self._bdd_prefix_regexp = None
@@ -118,7 +118,7 @@ class Languages:
 
     def _get_languages(self, languages, add_english=True) -> "list[Language]":
         languages, available = self._resolve_languages(languages, add_english)
-        returned: "list[Language]" = []
+        returned: list[Language] = []
         for lang in languages:
             if isinstance(lang, Language):
                 returned.append(lang)
