@@ -312,13 +312,13 @@ class Language:
 
     @property
     def bdd_prefixes(self) -> "set[str]":
-        return (
-            set(self.given_prefixes)
-            | set(self.when_prefixes)
-            | set(self.then_prefixes)
-            | set(self.and_prefixes)
-            | set(self.but_prefixes)
-        )
+        return {
+            *self.given_prefixes,
+            *self.when_prefixes,
+            *self.then_prefixes,
+            *self.and_prefixes,
+            *self.but_prefixes,
+        }
 
     def __eq__(self, other):
         return isinstance(other, type(self))
